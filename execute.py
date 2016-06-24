@@ -25,7 +25,7 @@ def plugin_loaded():
 def isLUAFounction(lineStr, lineNum, path):
 	retDis = {}
 
-	#判断是否为funciton 开头
+	#judge the head is funciton
 	pattern = re.compile(r'^function+[\s]+')
 	match = pattern.match(lineStr)
 	subStr = ""
@@ -46,9 +46,9 @@ def isLUAFounction(lineStr, lineNum, path):
 
 def isGobalVaribale(lineStr, lineNum, path):
 	retDis = {}
-	#剔除空格
+	#delete space
 	formatStr = re.sub(r'\s+', "", lineStr)
-	#判断是否由 大写 与 _ 组成的变量
+	#judge the word is make up of capital letter and '_'
 	match = re.match(r'^[A-Z_]+=', formatStr)
 	if match:
 		retDis['varName'] = match.group().split("=")[0]
@@ -74,11 +74,11 @@ class LuaJumpDefinitionCommand(sublime_plugin.TextCommand):
 		type = None
 		sels = self.view.sel()
 		for sel in sels:
-			#获得光标位置上的单词
+			#get word by the cursor position
 			regionWord = self.view.word(sel.a)
-			#获得单词下一个字符
+			#get the char after the word
 			nextSymbol = self.view.substr(regionWord.b)
-			#获得单词上一个字符
+			#get the char in front of the word
 			preSymbol = self.view.substr(regionWord.a - 1)
 			if nextSymbol == "(":
 				type = TYPE_CLASS
@@ -94,9 +94,9 @@ class LuaJumpDefinitionCommand(sublime_plugin.TextCommand):
 					analyseData = strVarName
 
 			if type == TYPE_CLASS:
-				print("分析的方法名：" + analyseData)
+				print("func name ：" + analyseData)
 			elif type == TYPE_VARIABLE:
-				print("分析的全局变量名：" + analyseData)
+				print("var name：" + analyseData)
 
 		if analyseData == "":
 			return
@@ -125,8 +125,8 @@ class LuaJumpDefinitionCommand(sublime_plugin.TextCommand):
 			lineNum = jumpData['lineNum'] + 1
 			self.view.window().open_file(jumpData['path'] + ":%d"%lineNum, sublime.ENCODED_POSITION)
 		else:
-			sublime.status_message("未找到方法或变量")	
-			print("未找到方法或变量")
+			sublime.status_message("no find")	
+			print("no find")
 
 class LuaBuildTagCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
@@ -134,7 +134,7 @@ class LuaBuildTagCommand(sublime_plugin.TextCommand):
 		rootPath = ''
 		rootPath = self.view.window().folders()
 
-		#遍历根目录下的所有lua文件，包含子目录
+		#find all lua files. include subdirectory
 		for root, dirs, files in os.walk(rootPath[0]):
 			for file in files:
 				if ".lua" in file:
