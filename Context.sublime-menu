@@ -1,0 +1,5 @@
+[
+    { "caption": "-", "id": "lua_jumpdefinition_start" },
+    { "command": "lua_jump_definition", "caption": "Lua Jump Definition" },
+    { "caption": "-", "id": "lua_jumpdefinition_end" }
+]

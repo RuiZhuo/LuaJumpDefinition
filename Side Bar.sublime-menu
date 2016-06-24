@@ -1,0 +1,5 @@
+[{
+    "caption": "LUA:ReBuild Tag",
+    "id": "lua_rebuild_tag",
+    "command": "lua_build_tag"
+}]

@@ -1,0 +1,3 @@
+[
+    { "keys": ["command+g"], "command": "lua_jump_definition" }
+]
