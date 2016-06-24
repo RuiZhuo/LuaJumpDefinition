@@ -11,7 +11,7 @@
         "*": [
           {
             "version": "1.0.0",
-            "url": ""
+            "url": "https://codeload.github.com/RuiZhuo/LuaJumpDefinition/zip/master"
           }
         ]
       }
