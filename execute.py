@@ -95,7 +95,6 @@ class LuaJumpDefinitionCommand(sublime_plugin.TextCommand):
 						if len(retDis) > 0:
 							analyseData = retDis["className"] + ":" + self.view.substr(regionWord)
 							break
-						print(self.view.substr(lineRegion))
 				else:
 					analyseData = self.view.substr(regionWord)
 			else:
