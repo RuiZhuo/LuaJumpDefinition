@@ -85,6 +85,17 @@ class LuaJumpDefinitionCommand(sublime_plugin.TextCommand):
 				if preSymbol == ":" or preSymbol == ".":
 					regionClass = self.view.word(regionWord.a - 2)
 					analyseData = self.view.substr(regionClass) + ":" + self.view.substr(regionWord)
+					lineRegion = self.view.line(sel.a)
+					while self.view.substr(regionClass) == "self":
+						if lineRegion.a == 0:
+							break
+						lineRegion = self.view.line(lineRegion.a - 1)
+						strLine = self.view.substr(lineRegion)
+						retDis = isLUAFounction(strLine, 0, "")
+						if len(retDis) > 0:
+							analyseData = retDis["className"] + ":" + self.view.substr(regionWord)
+							break
+						print(self.view.substr(lineRegion))
 				else:
 					analyseData = self.view.substr(regionWord)
 			else:
